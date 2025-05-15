@@ -6,9 +6,12 @@ A Vue 3 and Nuxt application for creating and responding to polls and forms.
 ## Features
 
 ### Polls
+https://github.com/user-attachments/assets/573b17c0-d335-4a92-8ebb-3b1d47c621e3
 
 
 ### Forms
+https://github.com/user-attachments/assets/9052c54b-238f-408f-92a6-a86a715b50c4
+
 
 
 ## Tech Stack
