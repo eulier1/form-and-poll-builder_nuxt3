@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Form } from '~/types';
 import { useFormsStore } from '~/stores/forms';
+import FormDisplay from '~/components/forms/FormDisplay.vue';
 
 const props = defineProps<{
   form: Form;
@@ -53,29 +54,6 @@ const filteredResponses = computed(() => {
   });
 });
 
-// Export
-const exportToCSV = () => {
-  const headers = ['Submitted At', ...props.form.questions.map(q => q.text)];
-  const rows = filteredResponses.value.map(response => {
-    const answers = props.form.questions.map(question => {
-      const answer = response.answers.find(a => a.questionId === question.id);
-      return answer ? String(answer.value) : '';
-    });
-    return [new Date(response.submittedAt).toLocaleString(), ...answers];
-  });
-
-  const csvContent = [
-    headers.join(','),
-    ...rows.map(row => row.join(','))
-  ].join('\n');
-
-  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-  const link = document.createElement('a');
-  link.href = URL.createObjectURL(blob);
-  link.download = `${props.form.title}-responses.csv`;
-  link.click();
-};
-
 const getQuestionText = (questionId: string) => {
   return props.form.questions.find((q: { id: string; text: string }) => q.id === questionId)?.text || questionId;
 };
@@ -93,15 +71,10 @@ const getAnswerForQuestion = (response: { answers: { questionId: string; value: 
         <h3 class="text-xl font-semibold text-gray-900">{{ form.title }}</h3>
         <p class="text-sm text-gray-500">{{ responses.length }} responses</p>
       </div>
-      <div class="flex space-x-4">
-        <button
-          class="px-4 py-2 text-sm text-blue-600 hover:text-blue-800 border border-blue-600 rounded-md"
-          @click="exportToCSV"
-        >
-          Export CSV
-        </button>
-      </div>
     </div>
+
+    <!-- Form Content -->
+    <FormDisplay :form="form" />
 
     <!-- Search -->
     <div class="relative">

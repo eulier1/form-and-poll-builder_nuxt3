@@ -99,8 +99,7 @@ const getQuestionComponent = (question: FormQuestion) => {
           v-if="question.type !== 'radio'"
           v-model="answers[question.id]"
           v-bind="getQuestionComponent(question).props"
-          :error="errors[question.id]"
-        />
+          :error="errors[question.id]" />
         
         <div v-else class="space-y-2">
           <div v-for="option in question.options" :key="option" class="flex items-center">
