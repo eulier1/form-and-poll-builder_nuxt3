@@ -2,23 +2,14 @@
 
 A Vue 3 and Nuxt application for creating and responding to polls and forms.
 
+
 ## Features
 
 ### Polls
-- Create single-question polls with multiple choice options
-- Respond to polls by selecting an option
-- View poll results with vote counts and percentages
+
 
 ### Forms
-- Create forms with multiple questions
-- Support for different question types:
-  - Short answer (text input)
-  - Long answer (textarea)
-  - Number input
-  - Radio buttons (single choice)
-- Mark questions as required or optional
-- Add placeholders to form questions
-- View form responses
+
 
 ## Tech Stack
 
@@ -53,9 +44,11 @@ npm run build
 │   ├── polls/
 │   │   ├── PollCreator.vue
 │   │   └── PollDisplay.vue
+│   │   └── PollResponses.vue
 │   ├── forms/
 │   │   ├── FormCreator.vue
 │   │   └── FormDisplay.vue
+│   │   └── FormResponses.vue
 │   └── ui/
 │       └── BaseInput.vue
 ├── stores/
@@ -73,19 +66,11 @@ npm run build
 
 ## Design Decisions
 
-1. **State Management**: Using Pinia for its simplicity and TypeScript support.
-2. **Component Structure**: Components are organized by feature (polls/forms) and reusability (ui).
-3. **Type Safety**: Full TypeScript support with strict mode enabled.
-4. **UI Framework**: Using Tailwind CSS for utility-first styling and Nuxt UI for pre-built components.
-5. **Form Validation**: Client-side validation for required fields.
-6. **Responsive Design**: Mobile-first approach with responsive layouts.
+1. **State Management**: Pinia with Typescript to act as internal CRUD operations without backend. In real life, dynamic routing is prefered.
+2. **Component Structure**: For consistency we prefer to follow the same folder structure convention.
+3. **Typescript**: To easily visualize data flow.
+4. **UI Framework**: Using Tailwind CSS for utility-first.
+5. **Form Validation**: Client-side validation for required fields. In real world, backend validation is needed.
+6. **Responsive Design**: Thanks to Tailwinds utilities.
 7. **No-Layout Folder**: Since the app is pretty small, there is no need to complicate the development
-
-## Future Improvements
-
-1. Add form response viewing interface
-2. Implement data persistence
-3. Add user authentication
-4. Add form templates
-5. Add form sharing functionality
-6. Add form analytics
+8. **No-Dinamic Nested Navigation**: With no backend for this app, I prefer to use Pinia to act like one. In real world dynamic routing is needed to add a layer of security and modularity.
